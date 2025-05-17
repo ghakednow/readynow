@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Полинам Вход Запрещен</title>
+
+  <!-- Необычный шрифт с Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Rubik Burned', cursive;
+      text-align: center;
+      padding: 50px 20px;
+      transition: background-color 1s ease;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 12px;
+      margin-top: 30px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      font-family: 'Rubik Burned', cursive;
+      animation: fadeIn 1s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background-color: #ff85c1;
+    }
+
+    #message {
+      margin-top: 40px;
+      font-size: 26px;
+      color: red;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    #cover {
+      display: none;
+      margin-top: 30px;
+      max-width: 90%;
+      border-radius: 15px;
+      animation: fadeInScale 1s ease forwards;
+    }
+
+    audio {
+      display: none;
+      margin-top: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <button id="mainButton">хочешь нажать?</button>
+  <div id="message"></div>
+  <img id="cover" src="https://i1.sndcdn.com/artworks-MvcmE7U2g3kPXW3X-a6QWsg-t500x500.jpg" width="300" alt="Обложка трека">
+  <audio id="track" src="https://soundcloud.com/lildrughill-842302188/lalala-feat-9mice" controls></audio>
+
+  <script>
+    const button = document.getElementById('mainButton');
+    const message = document.getElementById('message');
+    const cover = document.getElementById('cover');
+    const track = document.getElementById('track');
+
+    let step = 0;
+
+    button.addEventListener('click', () => {
+      step++;
+
+      if (step === 1) {
+        button.textContent = 'точно?';
+      } else if (step === 2) {
+        button.textContent = 'ты уверен/а?';
+      } else if (step === 3) {
+        message.textContent = 'ПОЛИНАМ ВХОД ЗАПРЕЩЕН';
+        message.style.opacity = 1;
+        button.textContent = 'ну ты ready?';
+      } else if (step === 4) {
+        document.body.style.backgroundColor = '#ff69b4';
+        cover.style.display = 'block';
+        track.style.display = 'block';
+        track.play().catch(() => {
+          alert("Нажми на плеер, чтобы включить музыку :)");
+        });
+        button.style.display = 'none';
+        message.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>
